@@ -1,0 +1,434 @@
+/*------------------------------------*\
+    $NAVBAR
+\*------------------------------------*/
+/**
+ * Basic navbar structural styling based on bootstrap. 
+ * http://twitter.github.io/bootstrap/components.html#navbar
+ * 
+ * Designed and built @kurenn  
+ */
+
+//
+//@variables
+//
+
+//Navigation general settings
+$navigation-bar-background: #191818 !default;
+$navigation-margin-bottom: 10px !default;
+$navigation-bar-color: #FFF !default;
+$navigation-bar-font-weight: 300 !default;
+$navigation-font-size: px-to-rems(13) !default;
+$navigation-fixed-z-index: 1030 !default;
+$navigation-bar-border-bottom: transparent !default;
+$navigation-bar-divider-color: scale-color($navigation-bar-background, $lightness: 13%) !default;
+$navigation-bar-divider-size: 1px !default;
+$navigation-bar-divider-style: solid !default;
+
+//Navigation links settings
+$navigation-bar-link-color: #FFF !default;
+$navigation-bar-link-hover-color: #999 !default;
+$navigation-bar-link-hover-decoration: none !default;
+$navigation-bar-hover-link-background-color: darken($navigation-bar-background, 1%) !default;
+
+//Brand section
+$navigation-bar-brand-section-font-size: px-to-rems(18) !default;
+$navigation-bar-brand-section-font-weight: 400 !default;
+$navigation-bar-brand-name-color: $navigation-bar-link-color !default;
+$navigation-bar-brand-name-hover-text-decoration: none !default;
+$navigation-bar-brand-name-hover-color: $navigation-bar-brand-name-color !default;
+
+//Buttons settings
+$navigation-bar-button-font-size: $navigation-font-size !default;
+$navigation-bar-button-height: 35px !default;
+$navigation-bar-button-margin-left: px-to-rems(8) !default;
+$navigation-bar-button-margin-right: px-to-rems(8) !default;
+$navigation-bar-menu-color: #FFF !default;
+
+//Icons settings
+$navigation-bar-icon-margin-right: 5px !default;
+
+//Text settings
+$navigation-bar-text-color: #CCC !default;
+
+//Active items
+$navigation-bar-active-color: #FFF !default;
+$navigation-bar-active-hover-color: darken($navigation-bar-active-color, 5%) !default;
+
+//Menu toggle
+$navigation-bar-menu-toggle-text-transform: uppercase !default;
+
+//Dropdown
+$navigation-bar-arrow-color: $navigation-bar-link-color !default;
+$navigation-bar-arrow-hover-color: $navigation-bar-link-hover-color !default;
+$navigation-bar-dropdown-z-index: $navigation-fixed-z-index + 10 !default;
+$navigation-bar-dropdown-header-text-transform: uppercase !default;
+$navigation-bar-dropdown-header-padding: px-to-rems(9) px-to-rems(17) px-to-rems(2) !default;
+$navigation-bar-dropdown-header-color: #777 !default;
+$navigation-bar-dropdown-header-font-weight: bold !default;
+$navigation-bar-dropdown-header-font-size: px-to-rems(8) !default;
+$navigation-bar-dropdown-divider-height: px-to-rems(1) !default; 
+$navigation-bar-dropdown-anchor-height: 45px !default;
+$navigation-bar-dropdown-anchor-line-height: $navigation-bar-dropdown-anchor-height !default;
+$navigation-bar-dropdown-right-position: 0px !default;
+$navigation-bar-dropdown-top-position: $navigation-bar-height !default;
+$navigation-bar-dropdown-border: 1px solid lighten($navigation-bar-background, 10%) !default;
+$include-navigation-bar-dropdown-top-border: false !default;
+$navigation-bar-dropdown-radius: 3px !default;
+$navigation-bar-dropdown-background: $navigation-bar-background !default;
+$navigation-bar-dropdown-divider-color: $navigation-bar-divider-color !default;
+$navigation-bar-dropdown-divider-size: $navigation-bar-divider-size !default;
+$navigation-bar-dropdown-divider-style: $navigation-bar-divider-style !default;
+
+
+//Form support
+$navigation-bar-with-form-padding: $navigation-bar-height / 4 $navigation-bar-height / 3 !default;
+$navigation-bar-with-form-input-height: $navigation-bar-height / 2 !default;
+
+//Media
+$navigation-bar-collapse-width: 768px !default;
+
+.navigation-bar {
+  background: $navigation-bar-background;
+  height: $navigation-bar-height;
+  margin-bottom: $navigation-margin-bottom;
+  overflow: hidden;
+  font-weight: $navigation-bar-font-weight;
+  border-bottom: $navigation-bar-border-bottom;
+
+  a {
+    @include touch-callout;
+  }
+
+  &.opened {
+    height: auto;
+
+    .brand-section .menu-toggle a {
+      color: $navigation-bar-link-hover-color;
+    } 
+
+    ul:not(.brand-section) {
+      width: 100%;
+
+      li.with-form {
+        margin-bottom: 5px;
+
+        input[type="text"],
+        input[type="search"] {
+          width: 100%;
+          display: block;
+          margin-bottom: 5px;
+        }
+
+        input[type="submit"] {
+          &.button {
+            &.pill {
+              @include border-radius($button-pill-radius); //variable extrated from _buttons.scss
+
+            }
+
+            &.radius {
+              @include border-radius($button-radius); //variable extrated from _buttons.scss
+            }
+          }
+        }
+      }
+
+      li.with-dropdown {
+        .dropdown {
+          position: static;
+        }
+      }
+
+      li {
+        width: 100%;
+        display: block;
+        padding: 0 $navigation-bar-height / 3;
+
+        a {
+          padding: 0;
+        }
+
+        .button {
+          width: 100%;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        &.divider {
+          height: auto;
+          border-bottom: $navigation-bar-divider-size $navigation-bar-divider-style $navigation-bar-divider-color;
+        }
+      }
+    }
+
+  }
+
+  // Plain text in topbar
+  .navigation-bar-text {
+    margin: 0;
+    line-height: $navigation-bar-height;
+    color: $navigation-bar-text-color;
+    display: inline-block;
+    font-size: $navigation-font-size;
+    padding: 0 $navigation-bar-height / 3;
+  }
+
+  .button {
+    color: #FFF;
+    font-size: $navigation-bar-button-font-size;
+    height: $navigation-bar-button-height;
+    line-height: $navigation-bar-button-height;
+    margin-left: $navigation-bar-button-margin-left;
+    margin-right: $navigation-bar-button-margin-right;
+    margin-top: ($navigation-bar-height / 2) - ($navigation-bar-button-height / 2);
+
+    &:hover {
+      color: #FFF;
+    }
+  }
+
+  [class^="fa"], 
+  [class*=" fa"] {
+    margin-right: $navigation-bar-icon-margin-right;
+    margin-left: $navigation-bar-icon-margin-right;
+  }
+
+  ul.pull-right {
+    li.with-dropdown {
+      .dropdown { 
+        right: $navigation-bar-dropdown-right-position; 
+        left: auto;
+        top: $navigation-bar-dropdown-top-position;
+      }
+    }
+  }
+
+  ul {
+    margin: 0;
+    list-style: none;
+    font-size: $navigation-font-size;
+    float: left;
+    width: auto;
+
+    li {
+      float: left;
+
+      &.active > a {
+        color: $navigation-bar-active-color;
+        background: darken($navigation-bar-background, 10%);
+
+        &:hover {
+          color: $navigation-bar-active-hover-color;
+        }
+      }
+
+      a:hover:not(.button) {
+        background: $navigation-bar-hover-link-background-color; 
+      }
+
+      a {
+        display: block;
+        padding: 0 $navigation-bar-height / 3;
+        height: $navigation-bar-height;
+        line-height: $navigation-bar-height;
+        color: $navigation-bar-link-color;
+
+        &:hover { 
+          text-decoration: $navigation-bar-link-hover-decoration; 
+          color: $navigation-bar-link-hover-color;
+        }
+      }
+
+      &.divider {
+        height: $navigation-bar-height; 
+        border-left: $navigation-bar-divider-size $navigation-bar-divider-style $navigation-bar-divider-color;
+      }
+    }
+
+    li.with-form {
+      padding: $navigation-bar-with-form-padding; 
+
+      input[type="text"],
+      input[type="search"] {
+        margin: 0;
+        width: auto;
+        float: left;
+        height: $navigation-bar-with-form-input-height;
+      }
+
+      input[type="submit"] {
+        float: left;
+        height: $navigation-bar-with-form-input-height;
+        line-height: 0;
+
+        &.button {
+          margin: 0;
+
+          &.pill {
+            @include border-radius(0 $button-pill-radius $button-pill-radius 0); //variable extrated from _buttons.scss
+
+          }
+
+          &.radius {
+            @include border-radius(0 $button-radius $button-radius 0); //variable extrated from _buttons.scss
+
+          }
+        }
+      }
+    }
+
+    li.with-dropdown {
+      position: relative;
+
+      &.opened {
+        .dropdown {
+          display: block;
+        }
+      }
+
+      .dropdown {
+        display: none; //hides the first time
+        position: absolute;
+        float: left;
+        top: auto;
+        left: 0;
+        z-index: $navigation-bar-dropdown-z-index;
+        min-width: 100%;
+        @include border-radius(0px 0px $navigation-bar-dropdown-radius $navigation-bar-dropdown-radius);
+        border: $navigation-bar-dropdown-border;
+        background: $navigation-bar-dropdown-background;
+
+        //Handle the top border on dropdowns as not always should be there
+        @if $include-navigation-bar-dropdown-top-border == false {
+          border-top: none;
+        }
+
+        li {
+          width: 100%;
+          height: auto;
+          white-space: nowrap;
+
+          a {
+            height: $navigation-bar-dropdown-anchor-height;
+            line-height: $navigation-bar-dropdown-anchor-line-height;
+          }
+
+          &.dropdown-header {
+            text-transform: $navigation-bar-dropdown-header-text-transform;
+            padding: $navigation-bar-dropdown-header-padding;
+            margin-bottom: 0;
+            color: $navigation-bar-dropdown-header-color;
+            font-weight: $navigation-bar-dropdown-header-font-weight;
+            font-size: $navigation-bar-dropdown-header-font-size;
+          }
+
+          &.divider {
+            height: $navigation-bar-dropdown-divider-height; 
+            border-top: $navigation-bar-dropdown-divider-size $navigation-bar-dropdown-divider-style $navigation-bar-dropdown-divider-color;
+          }
+        }
+      }
+    }
+
+  }
+
+  ul.pull-right {
+    float: right;
+  }
+
+  .brand-section {
+    font-size: $navigation-bar-brand-section-font-size; 
+    position: relative;
+    font-weight: $navigation-bar-brand-section-font-weight;
+
+    .brand-name {
+      a {
+        color: $navigation-bar-brand-name-color; 
+
+        &:hover {
+          text-decoration: $navigation-bar-brand-name-hover-text-decoration;
+          color: $navigation-bar-brand-name-hover-color;
+        }
+      }
+    }
+
+    li {
+      padding: 0;
+
+      &.menu-toggle {
+        display: none;
+        text-transform: $navigation-bar-menu-toggle-text-transform;
+        font-size: $navigation-font-size;
+        position: relative;
+        text-indent: -48px;
+        right: 20px;
+        width: 34px;
+
+        a:after {
+          content: '';
+          width: 16px;
+          height: 0;
+          position: absolute;
+          right: 0;
+          top: $navigation-bar-toggle-icon-top-position;
+          @include box-shadow(0 10px 0 1px $navigation-bar-menu-color,
+                              0 16px 0 1px $navigation-bar-menu-color,
+                              0 22px 0 1px $navigation-bar-menu-color);
+        }
+      }
+    }
+  }
+
+  &.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $navigation-fixed-z-index;
+  }
+
+}
+
+@include min-screen($navigation-bar-collapse-width) {
+  .navigation-bar { overflow: visible; }
+}
+
+//iPad fix
+@include ipad($orientation: portrait) {
+  .navigation-bar { overflow: hidden; }
+}
+
+@include max-screen($navigation-bar-collapse-width) {
+  .off-screen {
+    .navigation-bar {
+      .brand-section {
+        .brand-name {
+          a {
+            &:before {
+              display: inline-block;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .navigation-bar {
+    .brand-section {
+      width: 100%;
+      font-size: $navigation-bar-brand-section-font-size - 0.15; 
+
+      li {
+
+        &.menu-toggle {
+          display: block;
+          float: right;
+
+          &.hidden {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

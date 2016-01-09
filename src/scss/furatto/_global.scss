@@ -1,0 +1,23 @@
+// Global settings
+
+//
+//@imports
+//
+
+@import 'functions';
+
+//
+//@variables
+//
+
+$include-flexible-addons: true !default;
+
+//Inline navigation shared between: navigation ands tabs
+$navigation-inline-list-item-margin-left: px-to-rems(12) !default;
+
+// Navigation bar 
+$navigation-bar-height: 45px !default;
+$navigation-bar-toggle-icon-top-position: (($navigation-bar-height - 21) / 2) - 6 !default;
+
+// Media queries
+$media-display: "only screen" !default;
